@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}Room {{ room.room_number }}{% endblock %}
+
+{% block content %}
+
+<h2>Room {{ room.room_number }}</h2>
+
+<div class="grid small">
+
+    {% for slot in slots %}
+
+        {% if slot.filled %}
+            <!-- FILLED SLOT -->
+            <div class="tile room-slot filled">
+                <img src="{{ url_for('static', filename=slot.photo or 'images/profiles/Default.jpg') }}"
+                     class="slot-pic">
+                <h4>{{ slot.name }}</h4>
+            </div>
+        {% else %}
+            <!-- EMPTY SLOT -->
+            {% if not room.is_locked %}
+                <a href="/questionnaire/{{ room_id }}"
+                   class="tile room-slot empty clickable">
+                    <div class="placeholder-pic">+</div>
+                    <p>Yet to be filled</p>
+                    <small>Click to join</small>
+                </a>
+            {% else %}
+                <div class="tile room-slot empty locked">
+                    <div class="placeholder-pic">×</div>
+                    <p>Room Locked</p>
+                </div>
+            {% endif %}
+        {% endif %}
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

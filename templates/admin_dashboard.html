@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<h2>Student Accommodation Control</h2>
+
+<table class="admin-table">
+    <tr>
+        <th>Name</th>
+        <th>SR Number</th>
+        <th>Hostel</th>
+        <th>Floor</th>
+        <th>Room</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.sr }}</td>
+        <td>{{ s.hostel }}</td>
+        <td>{{ s.floor_number }}</td>
+        <td>{{ s.room_number }}</td>
+        <td>
+            <form method="post" action="/admin/expel/{{ s.student_id }}" style="display:inline">
+                <button class="btn danger">Expel</button>
+            </form>
+
+            <a href="/admin/modify/{{ s.student_id }}" target="_blank"
+               class="btn">Modify</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

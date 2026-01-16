@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Login | Roommate System
+{% endblock %}
+
+{% block content %}
+
+<div class="login-container">
+
+    <h2>Welcome</h2>
+
+    <!-- Tabs -->
+    <div class="login-tabs">
+        <button class="tab-btn active" onclick="showTab('student-login')">Student Login</button>
+        <button class="tab-btn" onclick="showTab('admin-login')">Admin Login</button>
+        <button class="tab-btn" onclick="showTab('student-register')">Student Register</button>
+    </div>
+
+    <!-- STUDENT LOGIN -->
+    <form method="post" action="/login" id="student-login" class="login-form">
+        <input autocomplete = "off" type="hidden" name="role" value="student">
+
+        <label>SR Number</label>
+        <input autocomplete = "off" type="text" name="sr" maxlength="10" required>
+
+        <label>Password (Last 5 digits of SR)</label>
+        <input autocomplete = "off" type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- ADMIN LOGIN -->
+    <form method="post" action="/login" id="admin-login" class="login-form hidden">
+        <input autocomplete = "off" type="hidden" name="role" value="admin">
+
+        <label>Admin ID</label>
+        <input autocomplete = "off" type="text" name="sr" required>
+
+        <label>Password</label>
+        <input autocomplete = "off" type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- STUDENT REGISTER -->
+    <form method="post" action="/register" id="student-register" class="login-form hidden">
+
+        <label>Student Name</label>
+        <input autocomplete = "off" type="text" name="name" required>
+
+        <label>SR Number (10 digits)</label>
+        <input autocomplete = "off" type="text" name="sr" maxlength="10" required>
+
+        <p class="hint">
+            Password will be automatically set as the <b>last 5 digits</b> of your SR number.
+        </p>
+
+        <button type="submit">Register</button>
+    </form>
+
+</div>
+
+<script>
+function showTab(tabId) {
+    document.querySelectorAll(".login-form").forEach(f => f.classList.add("hidden"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+    document.getElementById(tabId).classList.remove("hidden");
+
+    if (tabId === "student-login") document.querySelectorAll(".tab-btn")[0].classList.add("active");
+    if (tabId === "admin-login") document.querySelectorAll(".tab-btn")[1].classList.add("active");
+    if (tabId === "student-register") document.querySelectorAll(".tab-btn")[2].classList.add("active");
+}
+/* 🔑 THIS IS THE KEY PART */
+const params = new URLSearchParams(window.location.search);
+const tab = params.get("tab");
+
+if (tab) {
+    showTab(tab);
+}
+</script>
+
+{% endblock %}

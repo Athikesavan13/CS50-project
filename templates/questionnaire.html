@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block title %}Questionnaire{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Roommate Questionnaire</h2>
+<p class="subtitle">Your answers help us find compatible roommates</p>
+
+<form method="post"
+      action="/questionnaire"
+      onsubmit="return computeScores();"
+      class="questionnaire-form">
+
+    <!-- CLEANLINESS -->
+    <fieldset data-trait="cleanliness">
+        <legend>Cleanliness</legend>
+        <input type="radio" name="clean1" value="1" required> Very messy<br>
+        <input type="radio" name="clean1" value="2"> Somewhat messy<br>
+        <input type="radio" name="clean1" value="3"> Mostly clean<br>
+        <input type="radio" name="clean1" value="4"> Very clean<br>
+    </fieldset>
+
+    <!-- SLEEP -->
+    <fieldset data-trait="sleep">
+        <legend>Sleep Schedule</legend>
+        <input type="radio" name="sleep1" value="1" required> Before 10 PM<br>
+        <input type="radio" name="sleep1" value="2"> 10–12 PM<br>
+        <input type="radio" name="sleep1" value="3"> 12–2 AM<br>
+        <input type="radio" name="sleep1" value="4"> After 2 AM<br>
+    </fieldset>
+
+    <!-- NOISE -->
+    <fieldset data-trait="noise">
+        <legend>Noise Tolerance</legend>
+        <input type="radio" name="noise1" value="1" required> Very quiet<br>
+        <input type="radio" name="noise1" value="2"> Low<br>
+        <input type="radio" name="noise1" value="3"> Medium<br>
+        <input type="radio" name="noise1" value="4"> Loud is okay<br>
+    </fieldset>
+
+    <!-- CALLS -->
+    <fieldset data-trait="calls">
+        <legend>Phone Calls</legend>
+        <input type="radio" name="call1" value="1" required> Rarely<br>
+        <input type="radio" name="call1" value="2"> Sometimes<br>
+        <input type="radio" name="call1" value="3"> Often<br>
+        <input type="radio" name="call1" value="4"> Very often<br>
+    </fieldset>
+
+    <!-- STUDY -->
+    <fieldset data-trait="study">
+        <legend>Study Habits</legend>
+        <input type="radio" name="study1" value="1" required> Alone<br>
+        <input type="radio" name="study1" value="2"> Mostly alone<br>
+        <input type="radio" name="study1" value="3"> Mixed<br>
+        <input type="radio" name="study1" value="4"> Group study<br>
+    </fieldset>
+
+    <!-- SHARING -->
+    <fieldset data-trait="sharing">
+        <legend>Sharing</legend>
+        <input type="radio" name="share1" value="1" required> Never<br>
+        <input type="radio" name="share1" value="2"> Rarely<br>
+        <input type="radio" name="share1" value="3"> Often<br>
+        <input type="radio" name="share1" value="4"> Always<br>
+    </fieldset>
+
+    <!-- LAUNDARY -->
+    <fieldset data-trait="laundary">
+        <legend>Laundry Frequency</legend>
+        <input type="radio" name="laundry1" value="1" required> Monthly<br>
+        <input type="radio" name="laundry1" value="2"> Bi-weekly<br>
+        <input type="radio" name="laundry1" value="3"> Weekly<br>
+        <input type="radio" name="laundry1" value="4"> Very frequent<br>
+    </fieldset>
+
+    <!-- LANGUAGE -->
+    <fieldset data-trait="language">
+        <legend>Language Preference</legend>
+        <input type="radio" name="lang1" value="1" required> English only<br>
+        <input type="radio" name="lang1" value="2"> English + Hindi<br>
+        <input type="radio" name="lang1" value="3"> Regional<br>
+        <input type="radio" name="lang1" value="4"> Any<br>
+    </fieldset>
+
+    <!-- FINAL VALUES (MATCH DB SCHEMA EXACTLY) -->
+    <input type="hidden" name="cleanliness">
+    <input type="hidden" name="sleep">
+    <input type="hidden" name="noise">
+    <input type="hidden" name="calls">
+    <input type="hidden" name="study">
+    <input type="hidden" name="sharing">
+    <input type="hidden" name="laundary">
+    <input type="hidden" name="language">
+
+    <div class="form-actions">
+        <button type="submit">Submit & Join Room</button>
+    </div>
+</form>
+
+<script>
+function computeScores() {
+
+    function get(name) {
+        return parseFloat(
+            document.querySelector(`input[name="${name}"]:checked`).value
+        );
+    }
+
+    document.querySelector('input[name="cleanliness"]').value = get("clean1");
+    document.querySelector('input[name="sleep"]').value = get("sleep1");
+    document.querySelector('input[name="noise"]').value = get("noise1");
+    document.querySelector('input[name="calls"]').value = get("call1");
+    document.querySelector('input[name="study"]').value = get("study1");
+    document.querySelector('input[name="sharing"]').value = get("share1");
+    document.querySelector('input[name="laundary"]').value = get("laundry1");
+    document.querySelector('input[name="language"]').value = get("lang1");
+
+    return true;
+}
+</script>
+
+{% endblock %}

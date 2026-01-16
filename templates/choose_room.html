@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Choose Room{% endblock %}
+
+{% block content %}
+
+<h2>Select a Room</h2>
+<p class="subtitle">Only rooms with free slots are shown</p>
+
+<div class="grid small">
+
+{% for room in rooms %}
+    <form method="post" action="/assign-room/{{ room.id }}">
+        <button type="submit" class="tile room-tile selectable">
+            <div class="tile-label">{{ room.room_number }}</div>
+            <p>{{ room.occupied }} / {{ room.capacity }} occupied</p>
+            <small>Click to choose</small>
+        </button>
+    </form>
+{% endfor %}
+
+</div>
+
+{% endblock %}

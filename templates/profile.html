@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">My Profile</h2>
+
+<div class="profile-container">
+
+    <!-- LEFT -->
+    <div class="profile-photo-card">
+        <img src="{{ url_for('static', filename=user.photo or 'images/profiles/Default.jpg') }}"
+             class="profile-pic">
+
+        <form method="post" action="/profile/photo" enctype="multipart/form-data" class="photo-form">
+            <input type="file" name="photo" required>
+            <button type="submit">Upload Photo</button>
+        </form>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="profile-details-card">
+
+        {% if profile %}
+            <p class="profile-status">✔ Profile details saved</p>
+        {% endif %}
+
+        <form method="post" action="/profile" class="profile-form">
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" value="{{ profile.phone if profile }}">
+            </div>
+
+            <div class="form-group">
+                <label>Parent Name</label>
+                <input type="text" name="parent_name" value="{{ profile.parent_name if profile }}">
+            </div>
+
+            <div class="form-group">
+                <label>Parent Phone</label>
+                <input type="text" name="parent_phone" value="{{ profile.parent_phone if profile }}">
+            </div>
+
+            <div class="form-group">
+                <label>ID Proof Number</label>
+                <input type="text" name="id_proof" value="{{ profile.id_proof if profile }}">
+            </div>
+
+            <div class="form-actions">
+                
+                <button type="submit">
+                    {{ "Update Profile" if profile else "Save Profile" }}
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

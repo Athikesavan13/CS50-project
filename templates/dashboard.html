@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Dashboard | Roommate System
+{% endblock %}
+
+{% block content %}
+
+{% if session.message %}
+<div class="alert">
+    {{ session.message }}
+</div>
+{% set _ = session.pop("message") %}
+{% endif %}
+
+
+<h2>Welcome, {{ user.name }}</h2>
+
+{% if address %}
+    <p><strong>Hostel:</strong> {{ address.hostel_name }}</p>
+    <p><strong>Floor:</strong> {{ address.floor_number }}</p>
+    <p><strong>Room:</strong> {{ address.room_number }}</p>
+{% else %}
+    <p><em>No room assigned yet.</em></p>
+{% endif %}
+
+
+{% endblock %}

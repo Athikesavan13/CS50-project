@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Select Hostel
+{% endblock %}
+
+{% if address %}
+    <div class="alert">
+        You are already assigned to a room.
+    </div>
+{% else %}
+    <a href="/choose-room/floor/{{ floor_id }}" class="btn">
+        Choose Room
+    </a>
+{% endif %}
+
+
+{% block content %}
+
+<h2>Select a Hostel</h2>
+
+<div class="grid">
+    {% for hostel in hostels %}
+        <a href="/rooms/{{ hostel.id }}" class="tile">
+           <img src="{{ url_for('static', filename='images/Hostels/hostel' ~ hostel.id ~ '.jpg') }}"
+     alt="{{ hostel.name }}">
+            <div class="tile-label">{{ hostel.name }}</div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

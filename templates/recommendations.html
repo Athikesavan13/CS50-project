@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Top Matches{% endblock %}
+
+{% if address %}
+    <div class="alert">
+        You are already assigned to a room.
+    </div>
+{% else %}
+    <a href="/choose-room/floor/{{ floor_id }}" class="btn">
+        Choose Room
+    </a>
+{% endif %}
+
+
+{% block content %}
+
+<h2>Top Roommate Matches</h2>
+
+<div class="grid small">
+    {% for m in matches %}
+        <div class="tile">
+            <img src="{{ url_for('static', filename=m.photo or 'images/profiles/Default.jpg') }}">
+            <h4>{{ m.name }}</h4>
+            <p>Match: {{ m.score }}%</p>
+        </div>
+    {% endfor %}
+</div>
+
+<a href="/choose-room/floor/{{ floor_id }}" class="btn">
+    Choose Room
+</a>
+
+
+{% endblock %}

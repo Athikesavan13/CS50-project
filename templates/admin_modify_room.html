@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Modify Room{% endblock %}
+
+{% block content %}
+
+<h2>Modify Room for {{ student.name }} ({{ student.sr }})</h2>
+
+<div class="grid small">
+{% for r in rooms %}
+    <form method="post" action="/admin/assign/{{ student.id }}/{{ r.id }}">
+        <button class="tile room-tile selectable">
+            <b>{{ r.hostel }}</b><br>
+            Floor {{ r.floor_number }}<br>
+            Room {{ r.room_number }}<br>
+            {{ r.occupied }} / {{ r.capacity }}
+        </button>
+    </form>
+{% endfor %}
+</div>
+
+{% endblock %}

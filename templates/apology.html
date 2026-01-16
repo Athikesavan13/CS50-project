@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Access Error
+{% endblock %}
+
+{% block content %}
+
+<div class="apology-wrapper">
+
+    <div class="apology-card">
+        <img src="{{ url_for('static', filename='images/Error.jpg') }}" alt="Error">
+
+        <div class="apology-overlay">
+            <h2>Oops!</h2>
+            <p>{{ message }}</p>
+
+            <a href="{{ return_to }}" class="apology-btn">Go Back</a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

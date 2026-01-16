@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Floor {{ floor.floor_number }} Rooms
+{% endblock %}
+
+{% block content %}
+
+<h2>Floor {{ floor.floor_number }} – Rooms</h2>
+<p class="subtitle">Room availability overview (selection happens after questionnaire)</p>
+
+<div class="grid small">
+
+    {% for room in rooms %}
+
+        {% if room.is_locked %}
+            <!-- LOCKED ROOM -->
+            <div class="tile room-tile locked">
+                <div class="tile-label">{{ room.room_number }}</div>
+                <p>Locked</p>
+            </div>
+
+        {% else %}
+            <!-- VIEW-ONLY ROOM -->
+            <div class="tile room-tile">
+                <div class="tile-label">{{ room.room_number }}</div>
+                <p>{{ room.occupied }} / {{ room.capacity }} occupied</p>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

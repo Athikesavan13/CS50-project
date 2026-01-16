@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Select Hostel
+{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Select Your Hostel</h2>
+<p class="subtitle">Choose a hostel to continue room selection</p>
+
+<div class="grid">
+
+    {% for hostel in hostels %}
+        <a href="/rooms/{{ hostel.id }}" class="tile hostel-tile">
+            <img src="{{ url_for('static', filename='images/Hostels/' ~ hostel.id ~ '.jpg') }}"
+                 alt="{{ hostel.name }}">
+            <div class="tile-label">{{ hostel.name }}</div>
+        </a>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

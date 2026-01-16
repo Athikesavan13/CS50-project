@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ hostel.name }} Floors
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ hostel.name }} – Select Floor</h2>
+
+<div class="grid small">
+    {% for floor in floors %}
+        <a href="/questionnaire/floor/{{ floor.id }}" class="tile floor-tile">
+            <div class="tile-label">
+                Floor {{ floor.floor_number }}
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
